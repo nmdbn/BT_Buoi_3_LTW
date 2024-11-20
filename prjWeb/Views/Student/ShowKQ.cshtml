@@ -4,9 +4,8 @@
 @{
     ViewBag.Title = "Kết quả đăng ký";
 }
-<h2>Cảm ơn bạn @ViewBag.MSSV - @ViewBag.HoTen đã đăng ký chuyên ngành @ViewBag.ChuyenNganh</h2>
-
-<p>Số lượng sinh viên đã đăng ký ngành giống bạn là: @ViewBag.SameMajorCount</p>
-<p>Bạn là người thứ @ViewBag.OrderNumber đăng ký chuyên ngành.</p>
-
-<a href="/Student/Index" class="btn btn-primary">Quay lại trang đăng ký</a>
+<h2>Cảm ơn bạn!</h2>
+<p>Cảm ơn bạn <strong>@ViewBag.MSSV</strong> - <strong>@ViewBag.HoTen</strong> đã đăng ký chuyên ngành <strong>@ViewBag.ChuyenNganh</strong>.</p>
+<p>Bạn là người đăng ký <strong>thứ @ViewBag.orderNumber</strong> trong chuyên ngành <strong>@ViewBag.ChuyenNganh</strong>.</p>
+<p>Số lượng sinh viên đã đăng ký chuyên ngành của bạn là: <strong>@ViewBag.sameMajorCount</strong>.</p>
+<a href="@Url.Action("Index", "Student")" class="btn btn-primary">Quay lại trang đăng ký</a>

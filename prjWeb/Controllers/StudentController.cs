@@ -16,11 +16,20 @@ namespace prjWeb.Controllers
         [HttpPost]
         public ActionResult Index(Student student)
         {
+            if (Students.Any(s => s.MSSV == student.MSSV))
+            {
+                Student s = Students.FirstOrDefault(s => s.MSSV == student.MSSV);
+                return RedirectToAction("ShowKQ", new
+                {
+                    MSSV = s.MSSV,
+                    HoTen = s.HoTen,
+                    ChuyenNganh = s.ChuyenNganh
+                });
+            }
+
             if (ModelState.IsValid)
             {
                 Students.Add(student);
-
-                // Truyền dữ liệu sang trang ShowKQ
                 return RedirectToAction("ShowKQ", new
                 {
                     MSSV = student.MSSV,
@@ -35,7 +44,8 @@ namespace prjWeb.Controllers
         public ActionResult ShowKQ(string MSSV, string HoTen, string ChuyenNganh)
         {
             var sameMajorCount = Students.Count(s => s.ChuyenNganh == ChuyenNganh);
-            var orderNumber = Students.FindIndex(s => s.MSSV == MSSV) + 1;
+            var sameMajorStudents = Students.Where(s => s.ChuyenNganh == ChuyenNganh).ToList();
+            var orderNumber = sameMajorStudents.FindIndex(s => s.MSSV == MSSV) + 1;
 
             ViewBag.MSSV = MSSV;
             ViewBag.HoTen = HoTen;
